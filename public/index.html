@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=no"
+  />
+  <title>Magic Face Transform - AI Photo Transformation</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>"
+  />
+</head>
+<body>
+  <div id="app" aria-live="polite">
+    <!-- Welcome Screen -->
+    <section id="welcome-screen" class="screen active" aria-hidden="false">
+      <div class="animated-bg" aria-hidden="true">
+        <div class="star star-1">⭐</div>
+        <div class="star star-2">✨</div>
+        <div class="star star-3">💫</div>
+        <div class="star star-4">🎨</div>
+        <div class="star star-5">⚡</div>
+        <div class="star star-6">💖</div>
+      </div>
+
+      <div class="welcome-content">
+        <h2 class="main-title">AI Magical Photo Booth✨</h2>
+        <p class="subtitle">
+          Capture your face, choose a character, and watch the transformation happen! 
+        </p>
+
+
+         
+
+        <div class="feature-cards" role="list">
+          <div class="feature-card" role="listitem">
+            <div class="feature-icon">🖼️</div>
+            <h3>Magic Face Transform 🎭</h3>
+            <p>Transform yourself into any character with the power of AI</p>
+          </div>
+        </div>
+
+
+        <br>
+
+
+       <button id="start-camera-btn" class="main-btn" aria-controls="camera-screen">
+          <span class="btn-icon">📸</span>
+          Start Magic Camera
+        </button>
+
+      </div>
+    </section> 
+
+    <!-- Camera Screen -->
+    <section id="camera-screen" class="screen" aria-hidden="true" style="display: none;" >
+      <div class="camera-container">
+        <div class="camera-view">
+          <video id="camera-video" autoplay playsinline muted></video>
+          <canvas id="camera-canvas" style="display: none;"></canvas>
+
+          <!-- Face detection overlay -->
+          <div class="face-overlay" aria-hidden="true">
+            <div class="face-frame"></div>
+          </div>
+
+          <!-- Camera error message -->
+          <div id="camera-error" class="camera-error" style="display: none;">
+            <div class="error-content">
+              <div class="error-icon">📷</div>
+              <h3>Camera Access Required</h3>
+              <p id="error-message">
+                Unable to access camera. Please check permissions and try again.
+              </p>
+              <div class="error-actions">
+                <button id="retry-camera-btn" class="btn btn-primary">Try Again</button>
+                <button id="upload-photo-btn" class="btn btn-secondary">Upload Photo Instead</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Camera controls -->
+        <div class="camera-controls">
+          <button id="back-to-welcome-btn" class="btn btn-secondary">Back</button>
+          <button id="switch-camera-btn" class="btn btn-icon" title="Switch camera">🔄</button>
+          <button id="capture-btn" class="capture-btn" title="Capture">📷</button>
+          <button id="upload-btn" class="btn btn-icon" title="Upload">📁</button>
+        </div>
+
+        <input type="file" id="file-input" accept="image/*" style="display: none;" />
+        <p class="camera-instruction">
+          Position your face in the circle and tap the camera button! 📸
+        </p>
+      </div>
+    </section>
+
+    <!-- Character Selection Screen -->
+    <section id="character-screen" class="screen" aria-hidden="true" style="display: none;">
+      <div class="character-container">
+        <h2 class="screen-title">Choose Your Transformation! ✨</h2>
+        <p class="screen-subtitle">
+          Select a character or create your own magical transformation
+        </p>
+
+        <!-- Captured image preview -->
+        <div id="captured-preview" class="captured-preview" aria-live="polite">
+          <img id="captured-image" src="" alt="Captured photo preview" />
+          <div class="preview-badge" aria-hidden="true">✓</div>
+        </div>
+
+        <!-- Custom transformation input -->
+        <div class="custom-input-card">
+          <label for="custom-prompt">✍️ Custom Transformation:</label>
+          <input
+            type="text" 
+            id="custom-prompt"
+            placeholder="Type any character or style (e.g., 'pirate', 'princess', 'robot'...)"
+          />
+        </div>
+
+        <!-- Character categories -->
+        <div class="character-categories">
+          <div class="character-category">
+            <h3>👦 For Boys</h3>
+            <div class="character-buttons">
+              <button class="character-btn" data-character="Superman superhero with cape and iconic costume">🦸‍♂️ Superman</button>
+              <button class="character-btn" data-character="Goku from Dragon Ball with orange gi and spiky hair">🥋 Goku</button>
+              <button class="character-btn" data-character="Naruto with ninja outfit and headband">🍜 Naruto</button>
+            </div>
+          </div>
+
+          <div class="character-category">
+            <h3>👧 For Girls</h3>
+            <div class="character-buttons">
+              <button class="character-btn" data-character="Wonder Woman superhero with golden tiara and armor">👸 Wonder Woman</button>
+              <button class="character-btn" data-character="Barbie with blonde hair and sailor outfit">🎀 Barbie</button>
+              <button class="character-btn" data-character="Elsa from Frozen with icy blue dress and snowflake cape">❄️ Elsa</button>
+            </div>
+          </div>
+
+          <div class="character-category">
+            <h3>⭐ Popular</h3>
+            <div class="character-buttons">
+              <button class="character-btn" data-character="Iron Man with red and gold armor suit">🤖 Iron Man</button>
+              <button class="character-btn" data-character="Harry Potter with round glasses and wizard robe">🧙‍♂️ Harry Potter</button>
+              <button class="character-btn" data-character="hollywood movie star in a red carpet look">🎬 Movie Star</button>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-buttons">
+          <button id="retake-photo-btn" class="btn btn-secondary">Retake Photo 📸</button>
+          <button id="transform-btn" class="btn btn-primary">Transform Me! ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading Screen -->
+    <section id="loading-screen" class="screen" style="display: none;">
+      <div class="loading-container">
+        <div class="loading-animation">
+          <div class="magic-circle">
+            <div class="circle-outer"></div>
+            <div class="circle-inner"></div>
+            <div class="sparkle-icon">✨</div>
+          </div>
+        </div>
+
+        <h2 class="loading-title">✨ Creating Magic ✨</h2>
+        <p id="loading-message" class="loading-message">Casting transformation spell... ✨</p>
+
+        <div class="loading-dots" aria-hidden="true">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <p class="loading-subtitle">Please wait while we work our magic...</p>
+      </div>
+    </section>
+
+    <!-- Result Screen -->
+    <section id="result-screen" class="screen" aria-hidden="true">
+      <div class="result-container">
+        <h2 class="result-title">✨ Transformation Complete! ✨</h2>
+
+        <div class="result-image-container">
+          <img id="result-image" src="" alt="Transformed image" />
+        </div>
+
+        <div class="result-actions">
+          <button id="transform-again-btn" class="btn btn-primary">🔄 Transform Again</button>
+          <button id="share-result-btn" class="btn btn-secondary">📤 Share Result</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="share-title">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="share-title">📤 Share Your Transformation</h3>
+          <button id="close-modal-btn" class="close-btn" aria-label="Close">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="share-preview">
+            <img id="share-image" src="" alt="Share image preview" />
+          </div>
+
+          <div class="share-options">
+            <div class="share-option">
+              <h4>📧 Email</h4>
+              <div class="email-form">
+                <input type="email" id="email-input" placeholder="Enter your email address" />
+                <button id="send-email-btn" class="btn btn-primary">Send Email</button>
+              </div>
+            </div>
+
+            <div class="share-option">
+              <h4>📱 QR Code</h4>
+              <div class="qr-container">
+                <img id="qr-code" src="" alt="QR Code for image" />
+                <p>Scan with your phone to get the image</p>
+              </div>
+            </div>
+
+            <div class="share-option">
+              <h4>🔗 Direct Link</h4>
+              <div class="link-container">
+                <input type="text" id="share-link" readonly />
+                <button id="copy-link-btn" class="btn btn-secondaryy">Copy</button>
+              </div>
+            </div>
+
+            <div class="share-option">
+              <h4>💾 Download</h4>
+              <button id="download-btn" class="btn btn-primary">Download Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="js/app.js"></script>
+</body>
+</html>
