@@ -5,7 +5,6 @@
 
 const express = require('express');
 const cors = require('cors');
-const multer = require('multer');
 const axios = require('axios');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -285,7 +284,9 @@ async function googleImagen({ dataUri, prompt }) {
 // ===== Routes =====
 
 
-// Serve main page
+// Serve main page with static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
