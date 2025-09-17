@@ -44,7 +44,7 @@
   {
     "name": "Hand Drawing",
     "image": "https://cdn.domestika.org/c_fill,dpr_auto,f_auto,h_628,q_auto,w_1200/v1662995388/course-open-graph-covers/000/004/051/4051-original.png?1662995388",
-    "dataCharacter": "Transform him into a Hand drawn style person",
+    "dataCharacter": "Hand drawn image style",
     "description": "Cartoon"
   },
   {
@@ -73,7 +73,7 @@
   },
   {
     "name": "simple cartoon",
-    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJJqB7-iRuoHg5TVHTsNxl21_L29U1w4Ueww&s",
     "dataCharacter": "Transform him into a cartoon character style",
     "description": "Cartoon"
   },
@@ -168,6 +168,7 @@
     "description": "Mythical"
   }
 ]
+
 
 
 
