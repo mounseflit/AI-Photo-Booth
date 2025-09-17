@@ -616,13 +616,28 @@ class MagicFaceTransform {
   }
 
   downloadImage() {
+    // Print the image
     if (!this.transformedImage) return;
-    const link = document.createElement('a');
-    link.href = this.transformedImage;
-    link.download = `magic-transformation-${Date.now()}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Print Image</title>
+          <style>
+            body { margin: 0; text-align: center; }
+            img { max-width: 100%; height: auto; }
+            @media print {
+              body { margin: 0; }
+              img { max-width: 100%; height: auto; }
+            }
+          </style>
+        </head>
+        <body>
+          <img src="${this.transformedImage}" onload="window.print();window.close()" />
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
   }
 
   /* ---------- Errors & reset ---------- */
