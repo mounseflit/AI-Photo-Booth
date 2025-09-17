@@ -38,13 +38,13 @@
   {
     "name": "lego character",
     "image": "https://atlas-content-cdn.pixelsquid.com/stock-images/lego-character-people-XorKBGB-600.jpg",
-    "dataCharacter": "a yellow lego character in a the same outfit as the user, but with a big smile and as a lego figure",
+    "dataCharacter": "a yellow lego character in a the same outfit as the picture but as a lego figure, transform him to a lego figurine",
     "description": "Lego Figure"
   },
   {
-    "name": "3d cartoon character",
-    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
-    "dataCharacter": "A friendly cartoon bear with big eyes and a cheerful smile",
+    "name": "Hand Drawing",
+    "image": "https://cdn.domestika.org/c_fill,dpr_auto,f_auto,h_628,q_auto,w_1200/v1662995388/course-open-graph-covers/000/004/051/4051-original.png?1662995388",
+    "dataCharacter": "Transform him into a Hand drawn style person",
     "description": "Cartoon"
   },
   {
@@ -60,10 +60,22 @@
     "description": "Video Game Hero"
   },
   {
+    "name": "3d cartoon character",
+    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
+    "dataCharacter": "Transform him into a friendly 3D cartoon character with big eyes and a cheerful smile",
+    "description": "Cartoon"
+  },
+  {
     "name": "Jedi",
     "image": "https://upload.wikimedia.org/wikipedia/en/8/81/JediKnights.jpg",
     "dataCharacter": "A Jedi Knight from Star Wars in traditional robes, holding a green lightsaber",
     "description": "Jedi"
+  },
+  {
+    "name": "simple cartoon",
+    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
+    "dataCharacter": "Transform him into a cartoon character style",
+    "description": "Cartoon"
   },
   {
     "name": "Chef",
@@ -156,5 +168,6 @@
     "description": "Mythical"
   }
 ]
+
 
 
