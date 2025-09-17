@@ -1,0 +1,164 @@
+[
+  {
+    "name": "Superman",
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/d6/Superman_Man_of_Steel.jpg",
+    "dataCharacter": "Superman in his classic blue and red suit with the 'S' emblem",
+    "description": "Superhero"
+  },
+  {
+    "name": "Moroccan Football Player",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Oussama_Assaidi_2011_(2).jpg",
+    "dataCharacter": "A skilled Moroccan football player in a national team jersey",
+    "description": "Athlete"
+  },
+  {
+    "name": "3d cartoon character",
+    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
+    "dataCharacter": "A friendly cartoon bear with big eyes and a cheerful smile",
+    "description": "Cartoon"
+  },
+  {
+    "name": "Super-Model",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Amandine_nyfw_runway_model.jpg",
+    "dataCharacter": "A glamorous model in a stylish outfit strutting down a runway",
+    "description": "Fashion"
+  },
+  {
+    "name": "Professional",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/31/Hipster_Professional_(Unsplash).jpg",
+    "dataCharacter": "A confident business professional in a sharp suit and tie",
+    "description": "Business"
+  },
+  {
+    "name": "Astronaut",
+    "image": "https://www.quickanddirtytips.com/wp-content/uploads/2019/12/astronaut-jpg.webp",
+    "dataCharacter": "An astronaut in a classic white spacesuit exploring a new world",
+    "description": "Explorer"
+  },
+  {
+    "name": "movie star",
+    "image": "https://i.redd.it/fr634cb4t0me1.jpeg",
+    "dataCharacter": "A glamorous movie star in an elegant gown on the red carpet",
+    "description": "Celebrity"
+  },
+  {
+    "name": "lego character",
+    "image": "https://atlas-content-cdn.pixelsquid.com/stock-images/lego-character-people-XorKBGB-600.jpg",
+    "dataCharacter": "a yellow lego character in a the same outfit as the user, but with a big smile and as a lego figure",
+    "description": "Lego Figure"
+  },
+  {
+    "name": "police officer",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Police_officer_of_Morocco.jpg/250px-Police_officer_of_Morocco.jpg",
+    "dataCharacter": "A dedicated moroccan police officer in a blue uniform and cap, ready to serve",
+    "description": "Community Hero"
+  },
+  {
+    "name": "Pirate Captain",
+    "image": "https://thumbs.dreamstime.com/b/pirate-captain-1337715.jpg",
+    "dataCharacter": "A friendly pirate captain with a hat and an eyepatch on a ship",
+    "description": "Adventurer"
+  },
+  {
+    "name": "Mario",
+    "image": "https://mario.nintendo.com/static/952b701df4a019bd5ca103dde786eb59/a320e/mario.png",
+    "dataCharacter": "Mario, the famous video game hero, in his red cap and blue overalls",
+    "description": "Video Game Hero"
+  },
+  {
+    "name": "Jedi",
+    "image": "https://upload.wikimedia.org/wikipedia/en/8/81/JediKnights.jpg",
+    "dataCharacter": "A Jedi Knight from Star Wars in traditional robes, holding a green lightsaber",
+    "description": "Jedi"
+  },
+  {
+    "name": "Chef",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Chef_-_Leonard_Lee.jpg",
+    "dataCharacter": "A professional chef in a white uniform and tall hat, holding kitchen tools",
+    "description": "Culinary Expert"
+  },
+  {
+    "name": "Goku",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/35/Cosplayer_of_Goku,_Dragon_Ball_Z_at_CWT16_20070812.jpg",
+    "dataCharacter": "A cosplayer dressed as a Saiyan warrior with spiky hair and an orange and blue outfit",
+    "description": "Saiyan Warrior"
+  },
+  {
+    "name": "Doctor",
+    "image": "https://images.pexels.com/photos/8460157/pexels-photo-8460157.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "dataCharacter": "A caring doctor in a white coat with a stethoscope around the neck",
+    "description": "Healthcare"
+  },
+  {
+    "name": "Astrid",
+    "image": "https://i.pinimg.com/564x/d9/1a/bd/d91abd84ccc65728572a5d82e565bb69.jpg",
+    "dataCharacter": "Astrid from How to Train Your Dragon in her Viking outfit with axe with his dragon tooth necklace",
+    "description": "Viking Warrior"
+  },
+  {
+    "name": "Naruto",
+    "image": "https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg",
+    "dataCharacter": "Naruto Uzumaki, the ninja from the Hidden Leaf Village, in his orange jumpsuit",
+    "description": "Ninja"
+  },
+  {
+    "name": "Wonder Woman",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd9-pUbANy8UKJBiEtK6RR68bl1wV7qzgkDg&s",
+    "dataCharacter": "Wonder Woman, Amazonian princess, superhero with golden tiara and armor",
+    "description": "Superhero"
+  },
+  {
+    "name": "Iron Man",
+    "image": "https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg",
+    "dataCharacter": "Iron Man in his red and gold high-tech armor suit and no mask",
+    "description": "Superhero"
+  },
+  {
+    "name": "Robot-cop",
+    "image": "https://thebigsmoke.com.au/wp-content/uploads/901935-product-feature.jpg",
+    "dataCharacter": "A futuristic robot police officer in sleek metallic armor",
+    "description": "Futuristic"
+  },
+  {
+    "name": "Viking",
+    "image": "https://norsecraft.co.uk/cdn/shop/files/axe_1.webp?v=1710172437&width=2048",
+    "dataCharacter": "A fierce Viking warrior in traditional armor with a helmet and axe",
+    "description": "Warrior"
+  },
+  {
+    "name": "Samurai",
+    "image": "https://cdn.arturbanstatue.com/wp-content/uploads/2024/01/1.jpg",
+    "dataCharacter": "A noble samurai in traditional armor with a katana sword",
+    "description": "Warrior"
+  },
+  {
+    "name": "jungle explorer",
+    "image": "https://as2.ftcdn.net/jpg/00/72/71/29/1000_F_72712957_gEKfC1HoEH6dQI1NY4Rmyz7OmFIgUZO0.jpg",
+    "dataCharacter": "A daring jungle explorer in rugged outdoor gear with a hat and binoculars",
+    "description": "Adventurer"
+  },
+  {
+    "name": "Queen Elsa",
+    "image": "https://cdn.costumewall.com/wp-content/uploads/2015/09/elsa.jpg",
+    "dataCharacter": "Queen Elsa from Frozen in her sparkling blue ice dress",
+    "description": "Royalty"
+  },
+  {
+    "name": "Captain America",
+    "image": "https://static.wikia.nocookie.net/vsdebating/images/b/ba/Captain_america_PNG50.png",
+    "dataCharacter": "Captain America in his blue, red, and white uniform, holding his vibranium shield",
+    "description": "Superhero"
+  },
+  {
+    "name": "Sherlock Holmes",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL3I3uE_fZsU1rPfi8WLFQhroqUvBeRYKROw&s",
+    "dataCharacter": "Sherlock Holmes, the famous detective, in his deerstalker hat, smoking a pipe",
+    "description": "Detective"
+  },
+  {
+    "name": "Vampire",
+    "image": "https://keith-baker.com/wp-content/uploads/2024/10/noun-vampire-7296148-1.png",
+    "dataCharacter": "A classic vampire with fangs in a dark, elegant cape",
+    "description": "Mythical"
+  }
+]

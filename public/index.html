@@ -66,6 +66,14 @@
           <div class="face-overlay" aria-hidden="true">
             <div class="face-frame"></div>
           </div>
+          
+          <!-- Countdown overlay -->
+          <div id="countdown-overlay" class="countdown-overlay" style="display: none;">
+            <div class="countdown-container">
+              <div class="countdown-number">5</div>
+              <div class="countdown-text">Look at the camera</div>
+            </div>
+          </div>
 
           <!-- Camera error message -->
           <div id="camera-error" class="camera-error" style="display: none;">
@@ -76,8 +84,8 @@
                 Unable to access camera. Please check permissions and try again.
               </p>
               <div class="error-actions">
-                <button id="retry-camera-btn" class="btn btn-primary">Try Again</button>
-                <button id="upload-photo-btn" class="btn btn-secondary">Upload Photo Instead</button>
+                <button id="retry-camera-btn" class="btn btn-primary" hidden style="display: none;">Try Again</button>
+                <button id="upload-photo-btn" class="btn btn-secondary" hidden>Upload Photo Instead</button>
               </div>
             </div>
           </div>
@@ -85,10 +93,10 @@
 
         <!-- Camera controls -->
         <div class="camera-controls">
-          <button id="back-to-welcome-btn" class="btn btn-secondary">Back</button>
-          <button id="switch-camera-btn" class="btn btn-icon" title="Switch camera">🔄</button>
-          <button id="capture-btn" class="capture-btn" title="Capture">📷</button>
-          <button id="upload-btn" class="btn btn-icon" title="Upload">📁</button>
+          <button id="back-to-welcome-btn" class="btn btn-secondary" hidden style="display: none;">Back</button>
+          <button id="switch-camera-btn" class="btn btn-icon" title="Switch camera" hidden style="display: none;">🔄</button>
+          <button id="capture-btn" class="capture-btn" title="Capture" hidden style="display: none;">📷</button>
+          <button id="upload-btn" class="btn btn-icon" title="Upload" hidden style="display: none;">📁</button>
         </div>
 
         <input type="file" id="file-input" accept="image/*" style="display: none;" />
@@ -107,51 +115,30 @@
         </p>
 
         <!-- Captured image preview -->
-        <div id="captured-preview" class="captured-preview" aria-live="polite">
+        <div id="captured-preview" class="captured-preview large-preview" aria-live="polite">
           <img id="captured-image" src="" alt="Captured photo preview" />
           <div class="preview-badge" aria-hidden="true">✓</div>
         </div>
 
-        <!-- Custom transformation input -->
-        <div class="custom-input-card">
-          <label for="custom-prompt">✍️ Custom Transformation:</label>
+        <!-- Character slider -->
+        <!-- Hidden custom prompt field for compatibility with existing JS -->
+        <div style="display: none;">
           <input
             type="text" 
             id="custom-prompt"
             placeholder="Type any character or style (e.g., 'pirate', 'princess', 'robot'...)"
           />
         </div>
+        
+        <div class="character-slider-container">
+          <h3 class="slider-title">Choose Your Character:</h3>
+          <div class="character-slider" id="characters-container">
+            <!-- Personalized option -->
+            
 
-        <!-- Character categories -->
-        <div class="character-categories">
-          <div class="character-category">
-            <h3>👦 For Boys</h3>
-            <div class="character-buttons">
-              <button class="character-btn" data-character="Superman superhero with cape and iconic costume">🦸‍♂️ Superman</button>
-              <button class="character-btn" data-character="Goku from Dragon Ball with orange gi and spiky hair">🥋 Goku</button>
-              <button class="character-btn" data-character="Naruto with ninja outfit and headband">🍜 Naruto</button>
-            </div>
-          </div>
-
-          <div class="character-category">
-            <h3>👧 For Girls</h3>
-            <div class="character-buttons">
-              <button class="character-btn" data-character="Wonder Woman superhero with golden tiara and armor">👸 Wonder Woman</button>
-              <button class="character-btn" data-character="Barbie with blonde hair and sailor outfit">🎀 Barbie</button>
-              <button class="character-btn" data-character="Elsa from Frozen with icy blue dress and snowflake cape">❄️ Elsa</button>
-            </div>
-          </div>
-
-          <div class="character-category">
-            <h3>⭐ Popular</h3>
-            <div class="character-buttons">
-              <button class="character-btn" data-character="Iron Man with red and gold armor suit">🤖 Iron Man</button>
-              <button class="character-btn" data-character="Harry Potter with round glasses and wizard robe">🧙‍♂️ Harry Potter</button>
-              <button class="character-btn" data-character="hollywood movie star in a red carpet look">🎬 Movie Star</button>
-
-            </div>
           </div>
         </div>
+
 
         <!-- Action buttons -->
         <div class="action-buttons">
@@ -242,6 +229,40 @@
             <div class="share-option">
               <h4>💾 Download</h4>
               <button id="download-btn" class="btn btn-primary">Download Image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personalized Prompt Modal -->
+    <div id="personalized-modal" class="modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="personalized-title">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="personalized-title">✨ Create Your Personalized Transformation</h3>
+          <button id="close-personalized-modal-btn" class="close-btn" aria-label="Close">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="personalized-form">
+            <label for="personalized-prompt">Describe your transformation:</label>
+            <textarea 
+              id="personalized-prompt" 
+              placeholder="Type any character or style (e.g., 'pirate captain with eye patch', 'elegant princess with crown', 'futuristic robot warrior'...)"
+              rows="4"
+            ></textarea>
+            <div class="prompt-examples">
+              <p><strong>Examples:</strong></p>
+              <div class="example-tags">
+                <span class="example-tag" onclick="document.getElementById('personalized-prompt').value = 'medieval knight with shining armor'">Medieval Knight</span>
+                <span class="example-tag" onclick="document.getElementById('personalized-prompt').value = 'space astronaut with cosmic helmet'">Space Astronaut</span>
+                <span class="example-tag" onclick="document.getElementById('personalized-prompt').value = 'pirate captain with treasure map'">Pirate Captain</span>
+                <span class="example-tag" onclick="document.getElementById('personalized-prompt').value = 'magical fairy with glowing wings'">Magical Fairy</span>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button id="cancel-personalized-btn" class="btn btn-secondary">Cancel</button>
+              <button id="continue-personalized-btn" class="btn btn-primary">Continue ✨</button>
             </div>
           </div>
         </div>

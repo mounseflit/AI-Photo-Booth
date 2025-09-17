@@ -11,6 +11,7 @@ class MagicFaceTransform {
     this.facingMode = 'user';
     this.isNavigating = false;
     this.loadingInterval = null;
+    this.countdownInterval = null;
 
     this.loadingMessages = [
       "Mixing magical ingredients... 🧪",
@@ -32,6 +33,7 @@ class MagicFaceTransform {
 
   init() {
     this.bindEvents();
+    this.loadCharactersFromJson();
     this.setActiveScreen('welcome');
   }
 
@@ -72,19 +74,28 @@ class MagicFaceTransform {
   bindEvents() {
     // Welcome → Camera (start camera before showing the screen)
     document.getElementById('start-camera-btn').addEventListener('click', () => {
-      this.navigateTo('camera', { before: async () => this.startCamera() });
-      document.getElementById("camera-screen").style.display= "flex";
-      document.getElementById("welcome-screen").style.display= "none";
-      document.getElementById("character-screen").style.display= "none";
+
+      document.getElementById("camera-screen").style.display = "flex";
+      document.getElementById("welcome-screen").style.display = "none";
+      document.getElementById("character-screen").style.display = "none";
+
+      this.navigateTo('camera', {
+        before: async () => {
+          await this.startCamera();
+          // Start countdown after camera is initialized
+          setTimeout(() => this.startCountdown(), 1000);
+        }
+      });
+
     });
 
     // Camera → Back to Welcome
     document.getElementById('back-to-welcome-btn').addEventListener('click', () => {
       this.stopCamera();
       this.navigateTo('welcome');
-      document.getElementById("welcome-screen").style.display= "flex";
-      document.getElementById("character-screen").style.display= "none";
-      document.getElementById("camera-screen").style.display= "none";
+      document.getElementById("welcome-screen").style.display = "flex";
+      document.getElementById("character-screen").style.display = "none";
+      document.getElementById("camera-screen").style.display = "none";
     });
 
     document.getElementById('switch-camera-btn').addEventListener('click', () => {
@@ -92,10 +103,16 @@ class MagicFaceTransform {
     });
 
     document.getElementById('capture-btn').addEventListener('click', () => {
-      this.capturePhoto();
-      document.getElementById("camera-screen").style.display= "none";
-      document.getElementById("character-screen").style.display= "flex";
-      document.getElementById("welcome-screen").style.display= "none";
+      // Manual capture skips countdown
+      const cameraView = document.querySelector('.camera-view');
+      cameraView.classList.add('camera-flash');
+      setTimeout(() => {
+        cameraView.classList.remove('camera-flash');
+        this.capturePhoto();
+        document.getElementById("camera-screen").style.display = "none";
+        document.getElementById("character-screen").style.display = "flex";
+        document.getElementById("welcome-screen").style.display = "none";
+      }, 300);
     });
 
     document.getElementById('upload-btn').addEventListener('click', () => {
@@ -108,9 +125,9 @@ class MagicFaceTransform {
 
     document.getElementById('retry-camera-btn').addEventListener('click', () => {
       this.startCamera();
-      document.getElementById("welcome-screen").style.display= "none";
-      document.getElementById("character-screen").style.display= "none";
-      document.getElementById("camera-screen").style.display= "flex";
+      document.getElementById("welcome-screen").style.display = "none";
+      document.getElementById("character-screen").style.display = "none";
+      document.getElementById("camera-screen").style.display = "flex";
     });
 
     document.getElementById('file-input').addEventListener('change', (e) => {
@@ -119,10 +136,16 @@ class MagicFaceTransform {
 
     // Character screen
     document.getElementById('retake-photo-btn').addEventListener('click', () => {
-      this.navigateTo('camera', { before: async () => this.startCamera() });
-      document.getElementById("welcome-screen").style.display= "none";
-      document.getElementById("character-screen").style.display= "none";
-      document.getElementById("camera-screen").style.display= "flex";
+      this.navigateTo('camera', { 
+      before: async () => {
+        await this.startCamera();
+        // Start countdown after camera is initialized
+        setTimeout(() => this.startCountdown(), 1000);
+      }
+      });
+      document.getElementById("welcome-screen").style.display = "none";
+      document.getElementById("character-screen").style.display = "none";
+      document.getElementById("camera-screen").style.display = "flex";
     });
 
     document.getElementById('transform-btn').addEventListener('click', () => {
@@ -130,15 +153,15 @@ class MagicFaceTransform {
       if (document.getElementById('custom-prompt').value.trim() || this.selectedCharacter) {
 
 
-      this.navigateTo('loading');
-      document.getElementById('loading-screen').style.display = 'block';
-      document.getElementById("welcome-screen").style.display= "none";
-      document.getElementById("character-screen").style.display= "none";
-      document.getElementById("camera-screen").style.display= "none";
+        this.navigateTo('loading');
+        document.getElementById('loading-screen').style.display = 'block';
+        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("character-screen").style.display = "none";
+        document.getElementById("camera-screen").style.display = "none";
 
       }
 
-   
+
     });
 
     document.getElementById('custom-prompt').addEventListener('input', (e) => {
@@ -146,28 +169,54 @@ class MagicFaceTransform {
       this.clearCharacterSelection();
     });
 
+    // Character option click handlers (delegated for dynamic content)
+    document.addEventListener('click', (e) => {
+      const option = e.target.closest('.character-option');
+      if (!option) return;
+      const characterData = option.dataset.character;
+      if (characterData === 'personalized') {
+        this.showPersonalizedModal();
+      } else {
+        this.selectCharacterOption(option);
+      }
+    });
+
+    // Legacy character button support (if any remain)
     document.querySelectorAll('.character-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         this.selectCharacter(e.target);
       });
     });
 
+    // Personalized modal handlers
+    document.getElementById('close-personalized-modal-btn').addEventListener('click', () => {
+      this.hidePersonalizedModal();
+    });
+
+    document.getElementById('cancel-personalized-btn').addEventListener('click', () => {
+      this.hidePersonalizedModal();
+    });
+
+    document.getElementById('continue-personalized-btn').addEventListener('click', () => {
+      this.handlePersonalizedPrompt();
+    });
+
     // Result screen
     document.getElementById('transform-again-btn').addEventListener('click', () => {
 
-  
+
       document.getElementById("loading-screen").style.display = "none";
       document.getElementById("welcome-screen").style.display = "flex";
       document.getElementById("character-screen").style.display = "none";
       document.getElementById("camera-screen").style.display = "none";
       document.getElementById("result-screen").style.display = "none";
-   
+
 
       this.resetApp();
 
     });
 
-    
+
     // 
     document.getElementById('share-result-btn').addEventListener('click', () => {
       this.showShareModal();
@@ -190,6 +239,58 @@ class MagicFaceTransform {
     document.getElementById('download-btn').addEventListener('click', () => {
       this.downloadImage();
     });
+  }
+
+  /* ---------- Load characters from JSON ---------- */
+  async loadCharactersFromJson() {
+    try {
+      const res = await fetch('js/characters.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Failed to load characters');
+      const items = await res.json();
+
+
+
+      const container = document.getElementById('characters-container');
+      container.innerHTML = '';
+
+      const card0 = document.createElement('div');
+      card0.className = 'character-option personalized-option';
+      card0.dataset.character = 'personalized';
+      card0.innerHTML = `
+        <div class="character-option personalized-option" data-character="personalized">
+              <div class="character-image">
+                <div class="personalized-icon">✨</div>
+              </div>
+              <div class="character-name">Personalized</div>
+              <div class="character-description">Create your own</div>
+            </div>`;
+      container.appendChild(card0);
+
+
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'character-option';
+        card.dataset.character = item.dataCharacter || item.datacharacter || item["data-character"] || '';
+
+        card.innerHTML = `
+          <div class="character-image">
+            ${item.image ? `<img class="character-thumb" src="${item.image}" alt="${item.name}" onerror="this.style.display='none'"/>` : ''}
+            ${item.image ? '' : '<div class="character-emoji">🎭</div>'}
+          </div>
+          <div class="character-name">${item.name || 'Unknown'}</div>
+          <div class="character-description">${item.description || ''}</div>
+        `;
+
+        container.appendChild(card);
+      });
+    } catch (err) {
+      console.error('Characters load error:', err);
+      const container = document.getElementById('characters-container');
+      if (container) {
+        container.innerHTML = '<p style="color:#fff;opacity:.8">Failed to load characters.</p>';
+      }
+    }
   }
 
   /* ---------- Camera lifecycle ---------- */
@@ -216,6 +317,14 @@ class MagicFaceTransform {
   }
 
   stopCamera() {
+    // Clear countdown interval if it exists
+    if (this.countdownInterval) {
+      clearInterval(this.countdownInterval);
+      this.countdownInterval = null;
+      document.getElementById('countdown-overlay').style.display = 'none';
+    }
+
+    // Stop the camera stream
     if (this.stream) {
       this.stream.getTracks().forEach(track => track.stop());
       this.stream = null;
@@ -228,6 +337,42 @@ class MagicFaceTransform {
   }
 
   /* ---------- Capture / Upload ---------- */
+  startCountdown() {
+    // Show and initialize the countdown overlay
+    const countdownOverlay = document.getElementById('countdown-overlay');
+    const countdownNumber = countdownOverlay.querySelector('.countdown-number');
+    const cameraView = document.querySelector('.camera-view');
+
+    countdownOverlay.style.display = 'flex';
+    let count = 5;
+    countdownNumber.textContent = count;
+
+    this.countdownInterval = setInterval(() => {
+      count--;
+
+      if (count <= 0) {
+        // Clear the interval
+        clearInterval(this.countdownInterval);
+        this.countdownInterval = null;
+
+        // Flash effect
+        cameraView.classList.add('camera-flash');
+        setTimeout(() => {
+          cameraView.classList.remove('camera-flash');
+
+          // Hide the countdown overlay
+          countdownOverlay.style.display = 'none';
+
+          // Take the photo
+          this.capturePhoto();
+        }, 500);
+      } else {
+        // Update the countdown
+        countdownNumber.textContent = count;
+      }
+    }, 1000);
+  }
+
   capturePhoto() {
     const video = document.getElementById('camera-video');
     const canvas = document.getElementById('camera-canvas');
@@ -246,6 +391,11 @@ class MagicFaceTransform {
 
     this.stopCamera();
     this.showCharacterScreen();
+
+
+    document.getElementById("camera-screen").style.display = "none";
+    document.getElementById("character-screen").style.display = "flex";
+    document.getElementById("welcome-screen").style.display = "none";
   }
 
   handleFileUpload(event) {
@@ -261,15 +411,20 @@ class MagicFaceTransform {
       this.capturedImage = e.target.result;
       this.showCharacterScreen();
       document.getElementById("loading-screen").style.display = "none";
-      document.getElementById("welcome-screen").style.display = "none";   
+      document.getElementById("welcome-screen").style.display = "none";
       document.getElementById("character-screen").style.display = "flex";
-      document.getElementById("camera-screen").style.display = "none";  
+      document.getElementById("camera-screen").style.display = "none";
     };
     reader.readAsDataURL(file);
   }
 
   showCharacterScreen() {
     const previewImg = document.getElementById('captured-image');
+
+    document.getElementById("camera-screen").style.display = "none";
+    document.getElementById("character-screen").style.display = "flex";
+    document.getElementById("welcome-screen").style.display = "none";
+
     previewImg.src = this.capturedImage;
     this.setActiveScreen('character');
   }
@@ -285,7 +440,48 @@ class MagicFaceTransform {
 
   clearCharacterSelection() {
     document.querySelectorAll('.character-btn').forEach(btn => btn.classList.remove('selected'));
+    document.querySelectorAll('.character-option').forEach(option => option.classList.remove('selected'));
     this.selectedCharacter = '';
+  }
+
+  selectCharacterOption(option) {
+    // Clear previous selections
+    document.querySelectorAll('.character-option').forEach(opt => opt.classList.remove('selected'));
+    document.querySelectorAll('.character-btn').forEach(btn => btn.classList.remove('selected'));
+
+    // Select the clicked option
+    option.classList.add('selected');
+    this.selectedCharacter = option.dataset.character;
+    this.customPrompt = '';
+  }
+
+  showPersonalizedModal() {
+    document.getElementById('personalized-modal').style.display = 'flex';
+    document.getElementById('personalized-prompt').focus();
+  }
+
+  hidePersonalizedModal() {
+    document.getElementById('personalized-modal').style.display = 'none';
+    document.getElementById('personalized-prompt').value = '';
+  }
+
+  handlePersonalizedPrompt() {
+    const promptText = document.getElementById('personalized-prompt').value.trim();
+    if (!promptText) {
+      alert('Please enter a transformation description!');
+      return;
+    }
+
+    // Clear other selections and set custom prompt
+    document.querySelectorAll('.character-option').forEach(option => option.classList.remove('selected'));
+    document.querySelectorAll('.character-btn').forEach(btn => btn.classList.remove('selected'));
+
+    // Mark personalized option as selected and set the prompt
+    document.querySelector('.personalized-option').classList.add('selected');
+    this.selectedCharacter = '';
+    this.customPrompt = promptText;
+
+    this.hidePersonalizedModal();
   }
 
   async handleTransform() {
@@ -320,9 +516,9 @@ class MagicFaceTransform {
         this.showResultScreen();
         document.getElementById('loading-screen').style.display = 'none';
         document.getElementById('character-screen').style.display = 'none';
-        document.getElementById("camera-screen").style.display = "none";  
+        document.getElementById("camera-screen").style.display = "none";
         document.getElementById("result-screen").style.display = "flex";
-        
+
       } else {
         throw new Error('No image generated');
       }
