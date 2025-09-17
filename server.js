@@ -392,7 +392,7 @@ app.post('/api/transform/google', async (req, res) => {
       return res.status(400).json({ error: 'Missing prompt.' });
     }
     // 1. Build enhanced prompt: subtle improvements for better quality
-    const enhancedPrompt = "--keep-face -- Convert this person into a " + prompt + ", preserving **exactly the same face and facial expression and gender and person**. Change only their attire, gear, costume, outfit, colors, accessories, and background to match the specified character. Maintain their facial features, skin tone, hair style/color, expression, and head pose precisely as in the input image.--keep-face --  Render in a photorealistic Ultra-detailed image with natural lighting and a background that match the original background and High detail image with natural skin texture (8k resolution quality visual)";
+    const enhancedPrompt = "--keep-face -- Convert this person into a " + prompt + ", preserving **exactly the same face and facial expression and gender and person**. Change only their attire, gear, costume, outfit, colors, accessories, and background to match the specified character. Maintain their facial features, skin tone, hair style/color, expression, and head pose precisely as in the input image.--keep-face --  Render in a photorealistic Ultra-detailed image with natural lighting and a background that match the original background and High detail image with natural skin texture (8k resolution quality visual) i want a vertical portrait photo";
     // 2. Generating using googleImagen
     const imageUrl = await googleImagen({ dataUri: image, prompt: enhancedPrompt });
     if (!imageUrl) {
