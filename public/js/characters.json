@@ -12,12 +12,6 @@
     "description": "Athlete"
   },
   {
-    "name": "3d cartoon character",
-    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
-    "dataCharacter": "A friendly cartoon bear with big eyes and a cheerful smile",
-    "description": "Cartoon"
-  },
-  {
     "name": "Super-Model",
     "image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Amandine_nyfw_runway_model.jpg",
     "dataCharacter": "A glamorous model in a stylish outfit strutting down a runway",
@@ -42,16 +36,22 @@
     "description": "Celebrity"
   },
   {
+    "name": "police officer",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Police_officer_of_Morocco.jpg/250px-Police_officer_of_Morocco.jpg",
+    "dataCharacter": "A dedicated moroccan police officer in a blue uniform and cap, ready to serve",
+    "description": "Community Hero"
+  },
+  {
     "name": "lego character",
     "image": "https://atlas-content-cdn.pixelsquid.com/stock-images/lego-character-people-XorKBGB-600.jpg",
     "dataCharacter": "a yellow lego character in a the same outfit as the user, but with a big smile and as a lego figure",
     "description": "Lego Figure"
   },
   {
-    "name": "police officer",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Police_officer_of_Morocco.jpg/250px-Police_officer_of_Morocco.jpg",
-    "dataCharacter": "A dedicated moroccan police officer in a blue uniform and cap, ready to serve",
-    "description": "Community Hero"
+    "name": "3d cartoon character",
+    "image": "https://i.pinimg.com/474x/56/d8/d3/56d8d3b46b5d6d415b52b010be3f4dc2.jpg",
+    "dataCharacter": "A friendly cartoon bear with big eyes and a cheerful smile",
+    "description": "Cartoon"
   },
   {
     "name": "Pirate Captain",
@@ -162,3 +162,4 @@
     "description": "Mythical"
   }
 ]
+
