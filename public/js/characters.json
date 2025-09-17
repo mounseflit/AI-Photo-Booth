@@ -36,12 +36,6 @@
     "description": "Celebrity"
   },
   {
-    "name": "police officer",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Police_officer_of_Morocco.jpg/250px-Police_officer_of_Morocco.jpg",
-    "dataCharacter": "A dedicated moroccan police officer in a blue uniform and cap, ready to serve",
-    "description": "Community Hero"
-  },
-  {
     "name": "lego character",
     "image": "https://atlas-content-cdn.pixelsquid.com/stock-images/lego-character-people-XorKBGB-600.jpg",
     "dataCharacter": "a yellow lego character in a the same outfit as the user, but with a big smile and as a lego figure",
@@ -162,4 +156,5 @@
     "description": "Mythical"
   }
 ]
+
 
